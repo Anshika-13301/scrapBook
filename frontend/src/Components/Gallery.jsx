@@ -26,7 +26,7 @@ export default function Gallery({ token, setToken }) {
 
   const fetchMemories = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/memories', {
+      const res = await axios.get('https://scrapbook-270h.onrender.com/api/memories', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMemories(res.data);
@@ -75,7 +75,7 @@ export default function Gallery({ token, setToken }) {
   const handleFavoriteToggle = async (id, e) => {
     e.stopPropagation();
     try {
-      const res = await axios.patch(`http://localhost:5000/api/memories/${id}/favorite`, {}, {
+      const res = await axios.patch(`https://scrapbook-270h.onrender.com/api/memories/${id}/favorite`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMemories(memories.map(m => m._id === id ? res.data : m));
@@ -106,7 +106,7 @@ export default function Gallery({ token, setToken }) {
 
     try {
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/memories/${editingId}`, {
+        await axios.put(`https://scrapbook-270h.onrender.com/api/memories/${editingId}`, {
           title: formData.title,
           caption: formData.caption,
           memoryDate: formData.memoryDate,
@@ -126,7 +126,7 @@ export default function Gallery({ token, setToken }) {
         data.append('isLocked', formData.isLocked);
         data.append('image', formData.image);
 
-        await axios.post('http://localhost:5000/api/memories', data, {
+        await axios.post('https://scrapbook-270h.onrender.com/api/memories', data, {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
         });
       }
@@ -147,7 +147,7 @@ export default function Gallery({ token, setToken }) {
     e.stopPropagation();
     if (!window.confirm('Delete this memory photo?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/memories/${id}`, {
+      await axios.delete(`https://scrapbook-270h.onrender.com/api/memories/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchMemories();

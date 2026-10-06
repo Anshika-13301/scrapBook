@@ -15,7 +15,7 @@ export default function Login({ setToken }) {
     const endpoint = isRegister ? '/api/auth/register' : '/api/auth/login';
 
     try {
-      const res = await axios.post(`http://localhost:5000${endpoint}`, { email, password });
+      const res = await axios.post(`https://scrapbook-270h.onrender.com${endpoint}`, { email, password });
 
       if (isRegister) {
         setMessage(res.data.message);
