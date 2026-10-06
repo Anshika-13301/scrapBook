@@ -1,0 +1,18 @@
+# Root .gitignore
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Environment files
+*.env
+backend/.env
+frontend/.env
+
+# Build outputs
+frontend/dist/
+frontend/build/
+
+# Logs & OS junk
+*.log
+.DS_Store
+Thumbs.db
