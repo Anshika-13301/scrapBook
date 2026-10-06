@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Check filename casing (User.js)
+const User = require('../models/user'); // Check filename casing (User.js)
 
 const router = express.Router();
 
