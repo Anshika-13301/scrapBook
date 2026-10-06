@@ -14,11 +14,18 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/memories', memoryRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('MongoDB Connected');
-    app.listen(process.env.PORT || 5000, () => {
-      console.log(`Server running on port ${process.env.PORT || 5000}`);
-    });
-  })
-  .catch(err => console.error('MongoDB connection failed:', err));
+const PORT = process.env.PORT || 5000;
+
+// 1. Express server ko sabse pehle listen karayein 0.0.0.0 host binding ke sath
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// 2. Connect MongoDB separately
+if (process.env.MONGO_URI) {
+  mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('MongoDB Connected Successfully'))
+    .catch(err => console.error('MongoDB connection failed:', err.message));
+} else {
+  console.error('MONGO_URI is missing in Environment Variables!');
+}
